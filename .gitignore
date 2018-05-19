@@ -1,0 +1,6 @@
+node_modules
+.vscode
+.idea
+config/dev.js
+config/test.js
+config/prod.js
