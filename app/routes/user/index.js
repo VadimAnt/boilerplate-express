@@ -4,6 +4,7 @@ const AuthService = require('@services/AuthService');
 
 router.get('/', controller.index);
 router.get('/test', AuthService.verify(), (req, res) => {
+  console.log(req.user);
   res.send('fdsfsdfsdfsdfds');
 });
 

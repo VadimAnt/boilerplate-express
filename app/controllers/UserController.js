@@ -10,7 +10,6 @@ module.exports = class UserController {
 
   async index(req, res) {
     this.repository.findAll({});
-    console.log();
     res.send(await AuthService.sign({ user: 1 }));
   }
 

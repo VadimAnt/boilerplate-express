@@ -20,8 +20,19 @@ const jwtOptions = {
 module.exports = class AuthService {
   static init() {
 
+    const userService = new UserRepository();
+
+    passport.serializeUser((user, done) => {
+      done(null, user._id);
+    });
+
+    passport.deserializeUser((id, done) => {
+      userService.findOne({ query: { _id: id } }, (err, user) => {
+        done(err, user);
+      });
+    });
+
     passport.use(new LocalStrategy(authFields, async (email, password, done) => {
-      const userService = new UserRepository();
       const user = await userService.findOne({ query: { email } });
 
       if (!user) {
@@ -38,8 +49,7 @@ module.exports = class AuthService {
     }));
 
     passport.use(new JwtStrategy(jwtOptions, async (payload, done) => {
-      const userService = new UserRepository();
-      const user = await userService.findById({ query: payload.id });
+      const user = await userService.findById({ query: payload._id });
 
       if (user) {
         done(null, user);
@@ -51,8 +61,8 @@ module.exports = class AuthService {
     return passport;
   }
 
-  static verify() {
-    return passport.authenticate('jwt');
+  static verify(type = 'jwt') {
+    return passport.authenticate(type);
   }
 
   static async sign(payload) {
