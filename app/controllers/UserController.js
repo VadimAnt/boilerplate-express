@@ -1,4 +1,5 @@
 const UserRepository = require('@repo/UserRepository');
+const AuthService = require('@services/AuthService');
 
 module.exports = class UserController {
   constructor() {
@@ -7,10 +8,10 @@ module.exports = class UserController {
     this.index = this.index.bind(this);
   }
 
-  index(req, res) {
+  async index(req, res) {
     this.repository.findAll({});
-    console.log('test');
-    res.send('test');
+    console.log();
+    res.send(await AuthService.sign({ user: 1 }));
   }
 
 };
