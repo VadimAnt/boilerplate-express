@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const controller = new (require('@controllers/UserController'))();
-const AuthService = require('@services/AuthService');
+const AuthService = require('@services/auth/AuthService');
 
 router.get('/', controller.index);
 router.get('/test', AuthService.verify(), (req, res) => {

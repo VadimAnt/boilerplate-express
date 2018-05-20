@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const AuthService = require('@services/AuthService');
+const AuthService = require('@services/auth/AuthService');
 const DBService = require('@services/DBService');
 DBService.connect();
 
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   });
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   res.status(err.status || 500);
   res.send({
     message: err.message,
