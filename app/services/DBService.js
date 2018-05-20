@@ -29,8 +29,14 @@ module.exports = class DBService {
   }
   
   static createModel(modelName, schema) {
-    provider.Promise = global.Promise;
-    return provider.model(modelName, new Schema(schema));
+    try {
+
+      provider.Promise = global.Promise;
+      return provider.model(modelName, new Schema(schema));
+
+    } catch (error) {
+      throw error;
+    }
   }
 
   static getTypes() {
@@ -51,8 +57,14 @@ module.exports = class DBService {
 
     const conString = `${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`;
 
-    provider.connect(conString);
-    DBService.initModels();
+    try {
+
+      provider.connect(conString);
+      DBService.initModels();
+
+    } catch (error) {
+      throw error;
+    }
 
     return provider;
   }
