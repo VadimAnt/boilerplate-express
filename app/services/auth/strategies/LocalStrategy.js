@@ -2,13 +2,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const CryptoService = require('@services/CryptoService');
 const UserRepository = require('@repo/UserRepository');
 
-const authFields = {
+const options = {
   usernameField: 'email',
   passwordField: 'password',
   session: false,
 };
 
-module.exports = new LocalStrategy(authFields, async (email, password, done) => {
+module.exports = new LocalStrategy(options, async (email, password, done) => {
   const userRepository = new UserRepository();
   const user = await userRepository.findOne({ query: { email } });
 
