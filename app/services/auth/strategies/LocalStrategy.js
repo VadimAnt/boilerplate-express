@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const CryptoService = require('@services/CryptoService');
 const UserModel = require('@models/UserModel');
+const BadRequest = require('../../../errors/BadRequest');
 
 const options = {
   usernameField: 'email',
@@ -13,13 +14,14 @@ module.exports = new LocalStrategy(options, async (email, password, done) => {
   const user = await userModel.findOne({ query: { email } });
 
   if (!user) {
-    done(true, false);
+    return done(new BadRequest('Bad request'), false);
   }
+
   const checkPassword = await CryptoService.compare(password, user.password);
 
   if (!checkPassword) {
-    done(true, false);
+    return done(new BadRequest('Bad request'), false);
   }
 
-  done(null, user);
+  return done(null, user);
 });
