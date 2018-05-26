@@ -9,8 +9,8 @@ module.exports = class DBService {
   static initModels() {
     try {
 
-      fs.readdirSync('./app/models').forEach((file) => {
-        require(`@models/${file}`);
+      fs.readdirSync('./app/models/scheme').forEach((file) => {
+        require(`@models/scheme/${file}`);
       });
 
       return true;
@@ -43,7 +43,7 @@ module.exports = class DBService {
     return Schema.Types;
   }
 
-  static async connect() {
+  static connect() {
     const config = {
       dialect: process.env.DB_DIALECT,
       host: process.env.DB_HOST,
@@ -62,11 +62,12 @@ module.exports = class DBService {
       provider.connect(conString);
       DBService.initModels();
 
+      return provider;
+
     } catch (error) {
       throw error;
     }
 
-    return provider;
   }
 
 };

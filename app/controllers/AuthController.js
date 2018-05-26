@@ -1,10 +1,10 @@
-const UserRepository = require('@repo/UserRepository');
+const UserModel = require('@models/UserModel');
 const AuthService = require('@services/auth/AuthService');
 const CryptoService = require('@services/CryptoService');
 
 module.exports = class UserController {
   constructor() {
-    this.repository = new UserRepository();
+    this.repository = new UserModel();
 
     this.login = this.login.bind(this);
     this.register = this.register.bind(this);

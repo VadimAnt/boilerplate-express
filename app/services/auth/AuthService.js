@@ -1,12 +1,12 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const UserRepository = require('@repo/UserRepository');
+const UserModel = require('@models/UserModel');
 
 
 module.exports = class AuthService {
   static init() {
 
-    const userService = new UserRepository();
+    const userService = new UserModel();
 
     passport.serializeUser((user, done) => { done(null, user._id) });
     passport.deserializeUser((id, done) => {

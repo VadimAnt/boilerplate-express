@@ -18,7 +18,6 @@
     "@app": "app",
     "@controllers": "app/controllers",
     "@services": "app/services",
-    "@repo": "app/repositories",
     "@models": "app/models",
     "@routes": "app/routes",
     "@config": "config",

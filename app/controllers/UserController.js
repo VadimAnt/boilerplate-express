@@ -1,9 +1,9 @@
-const UserRepository = require('@repo/UserRepository');
+const UserModel = require('@models/UserModel');
 const AuthService = require('@services/auth/AuthService');
 
 module.exports = class UserController {
   constructor() {
-    this.repository = new UserRepository();
+    this.repository = new UserModel();
 
     this.index = this.index.bind(this);
   }
