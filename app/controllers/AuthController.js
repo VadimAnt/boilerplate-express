@@ -6,17 +6,29 @@ module.exports = class UserController {
   constructor() {
     this.repository = new UserModel();
 
-    this.login = this.login.bind(this);
-    this.register = this.register.bind(this);
+    this.signin = this.signin.bind(this);
+    this.logout = this.logout.bind(this);
+    this.signup = this.signup.bind(this);
   }
 
-  async login(req, res) {
+  async signin(req, res) {
     res.send({
-      token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
+      data: {
+        access_token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
+        user: req.user,
+      },
     });
   }
 
-  async register(req, res) {
+  async logout(req, res) {
+    res.send({
+      data: {
+        token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
+      },
+    });
+  }
+
+  async signup(req, res) {
     await this.repository.create({ query:{
       email: 'test@gmail.com',
       password: await CryptoService.hash('secret'),
