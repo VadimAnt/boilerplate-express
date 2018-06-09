@@ -2,7 +2,7 @@ const BaseError = require('./BaseError');
 
 module.exports = class BadRequest extends BaseError {
   constructor(message) {
-    super({ message, status: 404 });
+    super({ message, status: 400 });
   }
 
 };

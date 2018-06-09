@@ -15,5 +15,5 @@ module.exports = DBService.createModel('User', {
   },
   phone: {
     type: String,
-  }
+  },
 });
