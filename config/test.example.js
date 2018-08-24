@@ -1,5 +1,5 @@
 module.exports = {
-  APP_PORT: 8080,
+  APP_PORT: 8082,
 
   DB_HOST: '',
   DB_PORT: '',
