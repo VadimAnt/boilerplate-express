@@ -6,14 +6,14 @@ module.exports = {
     password: 'database_dev',
     database: 'database_dev',
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'mysql',
   },
   test: {
     username: 'database_test',
     password: null,
     database: 'database_test',
     host: '127.0.0.1',
-    dialect: 'mysql'
+    dialect: 'mysql',
   },
   production: {
     username: process.env.DB_USERNAME,
@@ -23,8 +23,8 @@ module.exports = {
     dialect: 'mysql',
     dialectOptions: {
       ssl: {
-        ca: fs.readFileSync(__dirname + '/mysql-ca-master.crt')
-      }
-    }
-  }
+        ca: fs.readFileSync(`${__dirname}/mysql-ca-master.crt`),
+      },
+    },
+  },
 };

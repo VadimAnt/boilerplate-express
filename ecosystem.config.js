@@ -1,20 +1,19 @@
 const fs = require('fs');
-const envirements = ['dev', 'prod', 'test'];
+
+const envirements = ['development', 'production', 'test'];
 
 const config = {
-  name: 'changeMyName',
+  name: 'bpolierplate-express',
   script: './bin/app.js',
   watch: true,
 };
 
 envirements.forEach((env) => {
-  const path = `./config/${env}.js`;
+  const path = `./config/${env}.env.js`;
   const envName = `env_${env}`;
   if (fs.existsSync(path)) {
     try {
-
       config[envName] = require(path);
-
     } catch (error) {
       throw error;
     }

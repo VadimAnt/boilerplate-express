@@ -1,20 +1,19 @@
 const provider = require('mongoose');
 const fs = require('fs');
+
 const { Schema } = provider;
+const SCHEMA_PATH = './app/models/schema';
 
 provider.Promise = global.Promise;
 
 module.exports = class DBService {
-
   static initModels() {
     try {
-
-      fs.readdirSync('./app/models/scheme').forEach((file) => {
-        require(`@models/scheme/${file}`);
+      fs.readdirSync(SCHEMA_PATH).forEach((schema) => {
+        require(`@models/schema/${schema}`);
       });
 
       return true;
-      
     } catch (error) {
       throw error;
     }
@@ -24,16 +23,14 @@ module.exports = class DBService {
     if (modelName) {
       return provider.models[modelName];
     }
-    
+
     return provider.models;
   }
-  
+
   static createModel(modelName, schema) {
     try {
-
       provider.Promise = global.Promise;
       return provider.model(modelName, new Schema(schema));
-
     } catch (error) {
       throw error;
     }
@@ -58,16 +55,12 @@ module.exports = class DBService {
     const conString = `${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`;
 
     try {
-
-      provider.connect(conString);
+      provider.connect(conString, { useNewUrlParser: true });
       DBService.initModels();
 
       return provider;
-
     } catch (error) {
       throw error;
     }
-
   }
-
 };

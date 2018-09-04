@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const controller = new (require('@controllers/UserController'))();
-const AuthService = require('@services/auth/AuthService');
+const { UserController } = require('@controllers');
+const { AuthService } = require('@services');
 
-router.get('/', AuthService.verify(), controller.getAll);
-router.get('/:id', AuthService.verify(), controller.getOne);
-router.post('/', AuthService.verify(), controller.create);
+router.get('/', AuthService.verify(), UserController.getAll);
+router.get('/:id', AuthService.verify(), UserController.getOne);
+router.post('/', AuthService.verify(), UserController.create);
 
 module.exports = router;

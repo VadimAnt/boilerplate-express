@@ -3,12 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const AuthService = require('@services/auth/AuthService');
-const DBService = require('@services/DBService');
+const { AuthService, DBService } = require('@services');
+
 DBService.connect();
 
 const app = express();
 const routes = require('@routes');
+
 const password = AuthService.init();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,11 +26,16 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send({
+  const errors = {
     message: err.message,
-    error: err.stack,
-  });
+  };
+
+  if (process.env.NODE_ENV === 'development') {
+    errors.stack = err.stack;
+  }
+
+  res.status(err.status || 500);
+  res.send(errors);
 });
 
 app.listen(process.env.APP_PORT, () => {

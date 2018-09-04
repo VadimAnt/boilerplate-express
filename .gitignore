@@ -1,6 +1,6 @@
 node_modules
 .vscode
 .idea
-config/dev.js
-config/test.js
-config/prod.js
+config/development.env.js
+config/test.env.js
+config/production.env.js
