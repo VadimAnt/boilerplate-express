@@ -26,16 +26,16 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  const errors = {
-    message: err.message,
-  };
+  // const errors = {
+  //   message: err.message,
+  // };
 
-  if (process.env.NODE_ENV === 'development') {
-    errors.stack = err.stack;
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   errors.stack = err.stack;
+  // }
 
-  res.status(err.status || 500);
-  res.send(errors);
+  // res.status(err.status || 500);
+  res.send(err);
 });
 
 app.listen(process.env.APP_PORT, () => {

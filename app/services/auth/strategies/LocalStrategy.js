@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const CryptoService = require('@services/CryptoService');
-const UserModel = require('@models/UserModel');
-const BadRequest = require('../../../errors/BadRequest');
+const { UserModel } = require('@models');
+const { BadRequest } = require('@errors');
 
 const options = {
   usernameField: 'email',

@@ -1,6 +1,6 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const UserModel = require('@models/UserModel');
+const { UserModel } = require('@models');
 const { LocalStrategy, JwtStrategy } = require('./auth/strategies');
 
 module.exports = class AuthService {

@@ -4,15 +4,12 @@ const fs = require('fs');
 const { Schema } = provider;
 const SCHEMA_PATH = './app/models/schema';
 
-provider.Promise = global.Promise;
-
 module.exports = class DBService {
   static initModels() {
     try {
       fs.readdirSync(SCHEMA_PATH).forEach((schema) => {
         require(`@models/schema/${schema}`);
       });
-
       return true;
     } catch (error) {
       throw error;
@@ -29,7 +26,6 @@ module.exports = class DBService {
 
   static createModel(modelName, schema) {
     try {
-      provider.Promise = global.Promise;
       return provider.model(modelName, new Schema(schema));
     } catch (error) {
       throw error;
