@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  // loggs
+  res.status(err.status);
   res.send(err);
 });
 
