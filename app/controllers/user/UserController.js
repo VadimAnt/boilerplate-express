@@ -1,3 +1,4 @@
+const { Response } = require('@utils');
 const { UserModel } = require('@models');
 const { CryptoService } = require('@services');
 
@@ -7,7 +8,7 @@ const UserController = {
   async getAll(req, res, next) {
     try {
       const users = await userModel.findAll({});
-      return res.send({ data: users });
+      return Response.success(res, users);
     } catch (error) {
       return next(error);
     }
@@ -23,7 +24,7 @@ const UserController = {
       };
 
       const user = await userModel.create({ query: data });
-      return res.send({ data: user });
+      return Response.success(res, user);
     } catch (error) {
       return next(error);
     }
@@ -32,7 +33,7 @@ const UserController = {
   async getOne(req, res, next) {
     try {
       const user = await userModel.findOne({ query: { _id: req.params.id } });
-      return res.send({ data: user });
+      return Response.success(res, user);
     } catch (error) {
       return next(error);
     }
