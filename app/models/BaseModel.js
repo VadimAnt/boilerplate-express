@@ -7,10 +7,6 @@ module.exports = class BaseRepository {
     this.model = model || DBService.models(this.modelName);
   }
 
-  get model() {
-    return this.model;
-  }
-
   async findOne({ query = {}, select = {}, lean = false }) {
     return this.model.findOne(query).select(select).lean(lean);
   }
