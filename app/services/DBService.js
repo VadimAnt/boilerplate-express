@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const { Schema } = provider;
 const SCHEMA_PATH = './app/models/schema';
+let connect = null;
 
 module.exports = class DBService {
   static initModels() {
@@ -51,10 +52,22 @@ module.exports = class DBService {
     const conString = `${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`;
 
     try {
-      provider.connect(conString, { useNewUrlParser: true });
-      DBService.initModels();
+      provider.connect(conString, { useNewUrlParser: true }).catch((error) => {
+        throw error;
+      });
 
-      return provider;
+      connect = provider.connection;
+
+      connect.once('open', () => {
+        process.stdout.write('Connected to mongo');
+      });
+
+      connect.on('error', (error) => {
+        process.stdout.write(error);
+      });
+
+      DBService.initModels();
+      return connect;
     } catch (error) {
       throw error;
     }

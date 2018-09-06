@@ -20,6 +20,7 @@
     "@controllers": "app/controllers",
     "@services": "app/services",
     "@errors": "app/errors",
+    "@utils": "app/utils",
     "@models": "app/models",
     "@routes": "app/routes",
     "@config": "config",

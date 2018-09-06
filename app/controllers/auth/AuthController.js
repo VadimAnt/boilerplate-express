@@ -1,16 +1,15 @@
 const { UserModel } = require('@models');
 const { AuthService, CryptoService } = require('@services');
+const { Response } = require('@utils');
 
 const userModel = new UserModel();
 
 const UserController = {
   async signin(req, res, next) {
     try {
-      return res.send({
-        data: {
-          access_token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
-          user: req.user,
-        },
+      return Response.success(res, {
+        access_token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
+        user: req.user,
       });
     } catch (error) {
       return next(error);
@@ -19,10 +18,8 @@ const UserController = {
 
   async logout(req, res, next) {
     try {
-      return res.send({
-        data: {
-          token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
-        },
+      return Response.success(res, {
+        token: await AuthService.sign(JSON.stringify(req.user.toJSON())),
       });
     } catch (error) {
       return next(error);
@@ -33,12 +30,12 @@ const UserController = {
     try {
       await userModel.create({
         query: {
-          email: 'test@gmail.com',
-          password: await CryptoService.hash('secret'),
+          email: req.email,
+          password: await CryptoService.hash(req.password),
         },
       });
 
-      return res.send({ sucess: true });
+      return Response.success(res, {});
     } catch (error) {
       return next(error);
     }
