@@ -1,6 +1,6 @@
+const { Response } = require('@utils');
 const { UserModel } = require('@models');
 const { AuthService, CryptoService } = require('@services');
-const { Response } = require('@utils');
 
 const userModel = new UserModel();
 
