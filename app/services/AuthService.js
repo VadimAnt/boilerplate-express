@@ -2,6 +2,7 @@ const provider = require('passport');
 const jwt = require('jsonwebtoken');
 const { UserModel } = require('@models');
 const { LocalStrategy, JwtStrategy } = require('./auth/strategies');
+const config = require('@config').app;
 
 const JWT_AUTHENTICATED = 'jwt';
 const LOCAL_AUTHENTICATED = 'local';
@@ -37,6 +38,6 @@ module.exports = class AuthService {
   }
 
   static async sign(payload) {
-    return jwt.sign(payload, process.env.JWT_SECRET);
+    return jwt.sign(payload, config.jwtKey);
   }
 };
