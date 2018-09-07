@@ -9,5 +9,11 @@ module.exports = {
   DB_DATABASE: '',
   DB_DIALECT: '',
 
+  SMTP_HOST: '',
+  SMTP_PORT: 0,
+  SMTP_SEQURE: true,
+  SMTP_USER: '',
+  SMTP_PASS: '',
+
   JWT_SECRET: '',
 };

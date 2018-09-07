@@ -1,13 +1,19 @@
 module.exports = {
-  NODE_ENV: 'development',
+  NODE_ENV: 'staging',
   APP_PORT: 8080,
 
-  DB_HOST: 'ds229450.mlab.com',
-  DB_PORT: '29450',
-  DB_USER: 'user',
-  DB_PASSWORD: 'test123456789',
-  DB_DATABASE: 'bolierplate',
-  DB_DIALECT: 'mongodb',
+  DB_HOST: '',
+  DB_PORT: '',
+  DB_USER: '',
+  DB_PASSWORD: '',
+  DB_DATABASE: '',
+  DB_DIALECT: '',
 
-  JWT_SECRET: 'test123456789',
+  SMTP_HOST: '',
+  SMTP_PORT: 0,
+  SMTP_SEQURE: true,
+  SMTP_USER: '',
+  SMTP_PASS: '',
+
+  JWT_SECRET: '',
 };
