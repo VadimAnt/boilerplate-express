@@ -34,14 +34,14 @@ module.exports = class DBService {
     return Schema.Types;
   }
 
-  static async connect() {
+  static async connect({ params }) {
     const config = {
-      dialect: process.env.DB_DIALECT,
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      pass: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      dialect: params.dialect,
+      host: params.host,
+      port: params.port,
+      user: params.user,
+      pass: params.pass,
+      database: params.database,
     };
 
     connection = provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`);

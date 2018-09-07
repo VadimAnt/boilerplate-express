@@ -1,14 +1,18 @@
 const fs = require('fs');
 
-const PATH_ENV = './env';
-const commonEnv = require(`${PATH_ENV}/common.env`);
+const APP_PATH_ENV = './env';
+const APP_SCRIPT_PATH = './boot/app.js';
+const APP_NAME = 'bpolierplate-express';
+const APP_WATCH = true;
+
+const commonEnv = require(`${APP_PATH_ENV}/common.env`);
 
 const envirements = ['development', 'production', 'test'];
 
 const config = {
-  name: 'bpolierplate-express',
-  script: './bin/app.js',
-  watch: true,
+  name: APP_NAME,
+  script: APP_SCRIPT_PATH,
+  watch: APP_WATCH,
   env: commonEnv,
 };
 
@@ -21,6 +25,8 @@ envirements.forEach((env) => {
     } catch (error) {
       throw error;
     }
+  } else {
+    process.stderr.write('You did not create environment file! ');
   }
 });
 
