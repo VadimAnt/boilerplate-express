@@ -1,4 +1,4 @@
-const AlredyExist = require('./AlredyExist');
+const AlreadyExist = require('./AlreadyExist');
 const BaseError = require('./BaseError');
 const BadRequest = require('./BadRequest');
 const Forbidden = require('./Forbidden');
@@ -6,7 +6,7 @@ const NotFound = require('./NotFound');
 const Unauthorized = require('./Unauthorized');
 
 module.exports = {
-  AlredyExist,
+  AlreadyExist,
   BadRequest,
   BaseError,
   Forbidden,
