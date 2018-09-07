@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const { AuthService, DBService } = require('@services');
 
+const app = express();
+
 DBService.connect({
   params: {
     dialect: process.env.DB_DIALECT,
@@ -17,9 +19,8 @@ DBService.connect({
   },
 });
 
-const app = express();
-const passport = AuthService.init();
 
+const passport = AuthService.init();
 const routes = require('@routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
