@@ -53,8 +53,6 @@
     "@utils": "app/utils",
     "@models": "app/models",
     "@validators": "app/middlewares/validators",
-    "@routes": "app/routes",
-    "@config": "config",
-    "@logs": "logs"
+    "@routes": "app/routes"
   }
 }
