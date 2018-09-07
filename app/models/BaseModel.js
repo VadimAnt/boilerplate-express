@@ -65,7 +65,6 @@ module.exports = class BaseRepository {
 
   async create({ query = {} }) {
     try {
-      console.log('->', DBService.models());
       return this.model.create(query);
     } catch (error) {
       throw error;
