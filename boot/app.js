@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { AuthService, DBService } = require('@services');
-
 DBService.connect({
   params: {
     dialect: process.env.DB_DIALECT,

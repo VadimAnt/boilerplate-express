@@ -1,4 +1,5 @@
 module.exports = {
+  NODE_ENV: 'development',
   APP_PORT: 8080,
 
   DB_HOST: '',
