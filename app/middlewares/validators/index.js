@@ -1,23 +1,24 @@
 const Joi = require('joi');
 const { BadRequest } = require('@errors');
 
-const handleErrors = (shema) => {
-  return async (req, res, next) => {
+const JOI_OPTIONS = {
+  abortEarly: false,
+};
 
-    let errors = null;
-    ['body', 'params', 'query'].forEach((name) => {
-      if (shema[name]) {
-        errors = Joi.validate(req[name], shema[name], {abortEarly: false});
-      }
-    });
-
-    if (errors && errors.error) {
-      return next(new BadRequest(errors.error));
+const handleErrors = schema => async (req, res, next) => {
+  let errors = null;
+  ['body', 'params', 'query'].forEach((name) => {
+    if (schema[name]) {
+      errors = Joi.validate(req[name], schema[name], JOI_OPTIONS);
     }
-    return next();
-  };
+  });
+
+  if (errors && errors.error) {
+    return next(new BadRequest(errors.error));
+  }
+  return next();
 };
 
 module.exports = {
-  handleErrors
-}
+  handleErrors,
+};

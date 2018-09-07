@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const { AuthService, DBService } = require('@services');
 
+DBService.connect();
+
 const app = express();
 const routes = require('@routes');
 
@@ -24,11 +26,23 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status);
-  res.send(err);
+  if (err && err.status && err.message) {
+    res.status(err.status);
+    return res.send(err);
+  }
+
+  const error = { status: 500, success: false };
+  if (process.env.NODE_ENV === 'development') {
+    error.message = err.stack || err;
+  } else {
+    error.message = 'Something wrong!';
+  }
+
+  res.status(500);
+  return res.send(error);
 });
 
-DBService.connect();
+
 
 app.listen(process.env.APP_PORT, () => {
   process.stdout.write(`Server start port: ${process.env.APP_PORT}`);

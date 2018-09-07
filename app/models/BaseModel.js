@@ -8,34 +8,74 @@ module.exports = class BaseRepository {
   }
 
   async findOne({ query = {}, select = {}, lean = false }) {
-    return this.model.findOne(query).select(select).lean(lean);
+    try {
+      return this.model.findOne(query)
+        .select(select)
+        .lean(lean);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findAll({ query = {}, select = {}, lean = false }) {
-    return this.model.find(query).select(select).lean(lean);
+    try {
+      return this.model.find(query)
+        .select(select)
+        .lean(lean);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findById({ query = {}, select = {}, lean = false }) {
-    return this.model.findById(query).select(select).lean(lean);
+    try {
+      return this.model.findById(query)
+        .select(select)
+        .lean(lean);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async findByIdAndUpdate({ query = {}, select = {}, lean = false }) {
-    return this.model.findByIdAndUpdate(query).select(select).lean(lean);
+    try {
+      return this.model.findByIdAndUpdate(query)
+        .select(select)
+        .lean(lean);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async remove({ query = {} }) {
-    return this.model.remove(query);
+    try {
+      return this.model.remove(query);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async update({ query = {} }) {
-    return this.model.update(query);
+    try {
+      return this.model.update(query);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async create({ query = {} }) {
-    return this.model.create(query);
+    try {
+      return this.model.create(query);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async insertMany({ query = {} }) {
-    return this.model.insertMany(query);
+    try {
+      return this.model.insertMany(query);
+    } catch (error) {
+      throw error;
+    }
   }
 };

@@ -11,6 +11,7 @@ module.exports = class BaseError extends Error {
   toJSON() {
     return {
       success: false,
+      status: this.status,
       message: this.message,
       stack: process.env.NODE_ENV === 'development' ? this.stack : [],
     };

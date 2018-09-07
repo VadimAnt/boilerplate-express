@@ -1,17 +1,18 @@
 const provider = require('mongoose');
 const fs = require('fs');
-
 const { Schema } = provider;
-const SCHEMA_PATH = './app/models/schema';
-let connect = null;
 
+provider.Promise = global.Promise;
 module.exports = class DBService {
+
   static initModels() {
     try {
-      fs.readdirSync(SCHEMA_PATH).forEach((schema) => {
-        require(`@models/schema/${schema}`);
+      fs.readdirSync('./app/models/schema').forEach((file) => {
+        require(`@models/schema/${file}`);
       });
+
       return true;
+
     } catch (error) {
       throw error;
     }
@@ -26,18 +27,15 @@ module.exports = class DBService {
   }
 
   static createModel(modelName, schema) {
-    try {
-      return provider.model(modelName, new Schema(schema));
-    } catch (error) {
-      throw error;
-    }
+    provider.Promise = global.Promise;
+    return provider.model(modelName, new Schema(schema));
   }
 
   static getTypes() {
     return Schema.Types;
   }
 
-  static connect() {
+  static async connect() {
     const config = {
       dialect: process.env.DB_DIALECT,
       host: process.env.DB_HOST,
@@ -51,25 +49,20 @@ module.exports = class DBService {
 
     const conString = `${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`;
 
-    try {
-      provider.connect(conString, { useNewUrlParser: true }).catch((error) => {
+    await (async () => {
+      try {
+
+        await provider.connect(conString);
+        DBService.initModels();
+
+        return provider;
+
+      } catch (error) {
         throw error;
-      });
+      }
+    })();
 
-      connect = provider.connection;
-
-      // connect.once('open', () => {
-      //   process.stdout.write('Connected to mongo');
-      // });
-
-      // connect.on('error', (error) => {
-      //   process.stdout.write(error);
-      // });
-
-      DBService.initModels();
-      return connect;
-    } catch (error) {
-      throw error;
-    }
+    return provider;
   }
+
 };
