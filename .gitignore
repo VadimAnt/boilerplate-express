@@ -1,10 +1,13 @@
 node_modules
 .vscode
 .idea
-env/env.development.js
-env/env.test.js
-env/env.production.js
-env/env.staging.js
+
+env/*
+!env/env.js
+!env/env.development.js
+!env/env.test.js
+!env/env.production.js
+!env/env.staging.js
 
 !logs/.gitkeep
 logs/*
