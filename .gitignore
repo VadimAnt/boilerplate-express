@@ -6,4 +6,5 @@ env/env.test.js
 env/env.production.js
 env/env.staging.js
 
-logs/.gitkeep
+!logs/.gitkeep
+logs/*
