@@ -1,8 +1,8 @@
 const provider = require('mongoose');
 const fs = require('fs');
 const { Schema } = provider;
+let connection = null;
 
-provider.Promise = global.Promise;
 module.exports = class DBService {
 
   static initModels() {
@@ -20,15 +20,14 @@ module.exports = class DBService {
 
   static models(modelName) {
     if (modelName) {
-      return provider.models[modelName];
+      return connection.models[modelName];
     }
 
-    return provider.models;
+    return connection.models;
   }
 
   static createModel(modelName, schema) {
-    provider.Promise = global.Promise;
-    return provider.model(modelName, new Schema(schema));
+    return connection.model(modelName, new Schema(schema));
   }
 
   static getTypes() {
@@ -45,24 +44,10 @@ module.exports = class DBService {
       database: process.env.DB_DATABASE,
     };
 
-    provider.Promise = global.Promise;
+    connection = provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`);
+    DBService.initModels();
 
-    const conString = `${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`;
-
-    await (async () => {
-      try {
-
-        await provider.connect(conString);
-        DBService.initModels();
-
-        return provider;
-
-      } catch (error) {
-        throw error;
-      }
-    })();
-
-    return provider;
+    return connection;
   }
 
 };

@@ -2,9 +2,9 @@ const DBService = require('@services/DBService');
 
 
 module.exports = class BaseRepository {
-  constructor({ modelName, model = null }) {
+  constructor({ modelName }) {
     this.modelName = modelName;
-    this.model = model || DBService.models(this.modelName);
+    this.model = DBService.models(this.modelName);
   }
 
   async findOne({ query = {}, select = {}, lean = false }) {
@@ -65,6 +65,7 @@ module.exports = class BaseRepository {
 
   async create({ query = {} }) {
     try {
+      console.log('->', DBService.models());
       return this.model.create(query);
     } catch (error) {
       throw error;

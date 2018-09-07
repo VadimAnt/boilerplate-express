@@ -5,7 +5,16 @@ const cors = require('cors');
 
 const { AuthService, DBService } = require('@services');
 
-DBService.connect();
+DBService.connect({
+  params: {
+    dialect: process.env.DB_DIALECT,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    pass: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
+  },
+});
 
 const app = express();
 const routes = require('@routes');

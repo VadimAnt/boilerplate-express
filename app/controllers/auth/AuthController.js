@@ -3,6 +3,7 @@ const { AuthService, CryptoService } = require('@services');
 const { Response } = require('@utils');
 
 const userModel = new UserModel();
+
 const UserController = {
   async signin(req, res, next) {
     try {
