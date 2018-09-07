@@ -7,10 +7,16 @@ module.exports = class AuthService {
   static init() {
     const userService = new UserModel();
     provider.serializeUser((user, done) => { done(null, user._id); });
-    provider.deserializeUser((id, done) => {
-      userService.findOne({ query: { _id: id } }, (err, user) => {
-        done(err, user);
-      });
+    provider.deserializeUser(async (id, done) => {
+      try {
+        const user = await userService.findOne({ query: { _id: id } });
+        if (user) {
+          return done(null, user);
+        }
+        return done('User not find', null);
+      } catch (error) {
+        return done(error, null);
+      }
     });
 
     provider.use(LocalStrategy);
