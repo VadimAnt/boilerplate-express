@@ -4,6 +4,18 @@ const APP_PATH_ENV = './env';
 const APP_SCRIPT_PATH = './boot/boot.app.js';
 const APP_NAME = 'bpolierplate-express';
 const APP_WATCH = true;
+const APP_NODE_ARGS = '';
+const APP_MERGE_LOGS = true;
+const APP_CWD = './';
+const APP_ARGS = [];
+const APP_IGNORE_WATCH = [
+  'node_modules',
+  'logs',
+  '.git',
+  '.idea',
+  '.pm2',
+  'temp',
+];
 
 const envs = {
   env: {},
@@ -13,8 +25,8 @@ const envs = {
 };
 
 
-if (fs.existsSync(`${APP_PATH_ENV}/env.js`)) {
-  envs.env = require(`${APP_PATH_ENV}/env.js`);
+if (fs.existsSync(`${APP_PATH_ENV}/env.common.js`)) {
+  envs.env = require(`${APP_PATH_ENV}/env.common.js`);
 }
 
 if (fs.existsSync(`${APP_PATH_ENV}/env.development.js`)) {
@@ -33,19 +45,12 @@ module.exports = {
   apps: [{
     name: APP_NAME,
     script: APP_SCRIPT_PATH,
-    args: [],
+    args: APP_ARGS,
     watch: APP_WATCH,
-    ignore_watch: [
-      'node_modules',
-      'logs',
-      '.git',
-      '.idea',
-      '.pm2',
-      'temp',
-    ],
-    node_args: '',
-    merge_logs: true,
-    cwd: './',
+    ignore_watch: APP_IGNORE_WATCH,
+    node_args: APP_NODE_ARGS,
+    merge_logs: APP_MERGE_LOGS,
+    cwd: APP_CWD,
     ...envs,
   }],
 };
