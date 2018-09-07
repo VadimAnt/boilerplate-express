@@ -7,7 +7,7 @@ const AuthSchema = require('@validators/auth');
 router.post(
   '/signin',
   validate(AuthSchema.signin),
-  AuthService.verify('local'),
+  AuthService.verifyUserCred(),
   AuthController.signin,
 );
 
@@ -20,7 +20,7 @@ router.post(
 router.post(
   '/logout',
   validate(AuthSchema.signup),
-  AuthService.verify(),
+  AuthService.isAuthenticated(),
   AuthController.logout,
 );
 

@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const { UserModel } = require('@models');
 const { LocalStrategy, JwtStrategy } = require('./auth/strategies');
 
+const JWT_AUTHENTICATED = 'jwt';
+const LOCAL_AUTHENTICATED = 'local';
+
 module.exports = class AuthService {
   static init() {
     const userService = new UserModel();
@@ -25,8 +28,12 @@ module.exports = class AuthService {
     return provider;
   }
 
-  static verify(type = 'jwt') {
-    return provider.authenticate(type);
+  static verifyUserCred() { // LOCAL STRATEGY
+    return provider.authenticate(LOCAL_AUTHENTICATED);
+  }
+
+  static isAuthenticated() { // JWT STRATEGY
+    return provider.authenticate(JWT_AUTHENTICATED);
   }
 
   static async sign(payload) {
