@@ -19,6 +19,7 @@
     "@app": "app",
     "@controllers": "app/controllers",
     "@services": "app/services",
+    "@scripts": "app/scripts",
     "@errors": "app/errors",
     "@utils": "app/utils",
     "@models": "app/models",
