@@ -12,7 +12,7 @@ const options = {
 module.exports = new LocalStrategy(options, async (email, password, done) => {
   try {
     const userModel = new UserModel();
-    const user = await userModel.indOne({ query: { email } });
+    const user = await userModel.findOne({ query: { email } });
     if (!user) {
       return done(new BadRequest('User not found'), false);
     }
