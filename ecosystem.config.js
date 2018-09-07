@@ -9,7 +9,7 @@ const config = {
   name: 'bpolierplate-express',
   script: './bin/app.js',
   watch: true,
-  //env: commonEnv,
+  env: commonEnv,
 };
 
 envirements.forEach((env) => {
