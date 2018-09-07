@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const APP_PATH_ENV = './env';
-const APP_SCRIPT_PATH = './boot/app.js';
+const APP_SCRIPT_PATH = './boot/boot.app.js';
 const APP_NAME = 'bpolierplate-express';
 const APP_WATCH = true;
 

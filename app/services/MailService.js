@@ -1,14 +1,24 @@
 const provider = require('nodemailer');
 
+const config = require('@config').smtp;
+
 class MailService {
-  constructor(config) {
-    this.setupMailProvider(config);
+  constructor() {
+    this.setupMailProvider({
+      host: config.host,
+      port: config.port,
+      secure: config.sequre === true,
+      auth: {
+        user: config.user,
+        pass: config.pass,
+      },
+    });
   }
 
-  setupMailProvider(config) {
+  setupMailProvider(smtpConfig) {
     this._serviceProvider = provider;
-    this.config = config;
-    this.transport = this._serviceProvider.createTransport(this.config);
+    this.smtpConfig = smtpConfig;
+    this.transport = this._serviceProvider.createTransport(this.smtpConfig);
 
     return this.transport;
   }

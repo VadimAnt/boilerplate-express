@@ -1,6 +1,8 @@
 const provider = require('winston');
 require('winston-daily-rotate-file');
 
+const config = require('@config').logger;
+
 class LoggerService {
   constructor() {
     this.logger = provider.createLogger({
@@ -13,12 +15,12 @@ class LoggerService {
 
   addTransports() {
     this.logger.add(new (provider.transports.DailyRotateFile)({
-      dirname: 'logs',
-      filename: 'application-%DATE%.log',
-      datePattern: 'YYYY-MM-DD-HH',
-      zippedArchive: true,
-      maxSize: '20m',
-      maxFiles: '14d',
+      dirname: config.dailyRotate.dirname,
+      filename: config.dailyRotate.filename,
+      datePattern: config.dailyRotate.datePattern,
+      zippedArchive: config.dailyRotate.fileZip === true,
+      maxSize: config.dailyRotate.fileMaxSize,
+      maxFiles: config.dailyRotate.fileMaxOld,
     }));
   }
 

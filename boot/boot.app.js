@@ -4,22 +4,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const {
-  AuthService,
-  DBService,
-  LoggerService,
-} = require('@services');
+const { AuthService, DBService, LoggerService } = require('@services');
 
 const app = express();
+const config = require('@config');
 
 DBService.connect({
   params: {
-    dialect: process.env.DB_DIALECT,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    pass: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    dialect: config.db.dialect,
+    host: config.db.host,
+    port: config.db.port,
+    user: config.db.user,
+    pass: config.db.pass,
+    name: config.db.name,
   },
 });
 
@@ -46,18 +43,17 @@ app.use((err, req, res, next) => {
   }
 
   const error = { status: httpStatus.INTERNAL_SERVER_ERROR, success: false };
-  if (process.env.NODE_ENV === 'development') {
+  if (config.app.env === 'development') {
     error.message = err.stack || err;
   } else {
     error.message = 'Something wrong!';
   }
 
-  console.log(LoggerService);
   LoggerService.log({ message: error.message, level: 'error' });
   res.status(error.status);
   return res.send(error);
 });
 
 app.listen(process.env.APP_PORT, () => {
-  process.stdout.write(`Server start port: ${process.env.APP_PORT}`);
+  process.stdout.write(`Server start port: ${config.app.port}`);
 });

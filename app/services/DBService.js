@@ -40,10 +40,10 @@ module.exports = class DBService {
       port: params.port,
       user: params.user,
       pass: params.pass,
-      database: params.database,
+      name: params.name,
     };
 
-    connection = provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.database}`);
+    connection = provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.name}`);
     DBService.initModels();
 
     return connection;

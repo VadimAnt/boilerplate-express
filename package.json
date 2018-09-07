@@ -2,7 +2,7 @@
   "name": "boilerplate-express",
   "version": "1.0.0",
   "description": "",
-  "main": "./boot/app.js",
+  "main": "./boot/boot.app.js",
   "scripts": {
     "start": "node_modules/.bin/pm2 start ecosystem.config.js --env development",
     "start:production": "node_modules/.bin/pm2 start ecosystem.config.js --env production",
@@ -53,6 +53,7 @@
     "@utils": "app/utils",
     "@models": "app/models",
     "@validators": "app/middlewares/validators",
-    "@routes": "app/routes"
+    "@routes": "app/routes",
+    "@config": "boot/boot.config.js"
   }
 }
