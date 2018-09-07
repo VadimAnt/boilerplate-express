@@ -3,11 +3,11 @@ node_modules
 .idea
 
 env/*
-!env/env.js
-!env/env.development.js
-!env/env.test.js
-!env/env.production.js
-!env/env.staging.js
+!env/env.example.js
+!env/env.development.example.js
+!env/env.test.example.js
+!env/env.production.example.js
+!env/env.staging.example.js
 
 !logs/.gitkeep
 logs/*
