@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "node_modules/.bin/pm2 start ecosystem.config.js --env development",
-    "start:prod": "node_modules/.bin/pm2 start ecosystem.config.js --env production",
-    "start:test": "node_modules/.bin/pm2 start ecosystem.config.js --env test",
-    "start": "./bin/app.js",
+    "start": "node_modules/.bin/pm2 start ecosystem.config.js --env development",
+    "start:production": "node_modules/.bin/pm2 start ecosystem.config.js --env production",
+    "start:staging": "node_modules/.bin/pm2 start ecosystem.config.js --env staging",
     "lint:check": "node_modules/.bin/eslint . *.js",
     "lint:fix": "node_modules/.bin/eslint . *.js --fix"
   },

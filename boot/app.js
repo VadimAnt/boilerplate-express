@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { AuthService, DBService } = require('@services');
+
 DBService.connect({
   params: {
     dialect: process.env.DB_DIALECT,
@@ -12,18 +13,17 @@ DBService.connect({
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     pass: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    database: process.env.DB_DATABASE,
   },
 });
 
 const app = express();
 const routes = require('@routes');
-
-const password = AuthService.init();
+const passport = AuthService.init();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(password.initialize());
+app.use(passport.initialize());
 app.use(cors());
 app.use(routes);
 app.use((req, res, next) => {
