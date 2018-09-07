@@ -18,8 +18,9 @@ DBService.connect({
 });
 
 const app = express();
-const routes = require('@routes');
 const passport = AuthService.init();
+
+const routes = require('@routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
