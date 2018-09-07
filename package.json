@@ -2,7 +2,7 @@
   "name": "boilerplate-express",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./boot/app.js",
   "scripts": {
     "start": "node_modules/.bin/pm2 start ecosystem.config.js --env development",
     "start:production": "node_modules/.bin/pm2 start ecosystem.config.js --env production",
