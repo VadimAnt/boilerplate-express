@@ -58,13 +58,13 @@ module.exports = class DBService {
 
       connect = provider.connection;
 
-      connect.once('open', () => {
-        process.stdout.write('Connected to mongo');
-      });
+      // connect.once('open', () => {
+      //   process.stdout.write('Connected to mongo');
+      // });
 
-      connect.on('error', (error) => {
-        process.stdout.write(error);
-      });
+      // connect.on('error', (error) => {
+      //   process.stdout.write(error);
+      // });
 
       DBService.initModels();
       return connect;
