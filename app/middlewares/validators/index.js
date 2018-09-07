@@ -5,7 +5,7 @@ const JOI_OPTIONS = {
   abortEarly: false,
 };
 
-const handleErrors = schema => async (req, res, next) => {
+const validate = schema => async (req, res, next) => {
   let errors = null;
   ['body', 'params', 'query'].forEach((name) => {
     if (schema[name]) {
@@ -20,5 +20,5 @@ const handleErrors = schema => async (req, res, next) => {
 };
 
 module.exports = {
-  handleErrors,
+  validate,
 };

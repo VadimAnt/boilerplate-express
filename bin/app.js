@@ -1,4 +1,5 @@
 require('module-alias/register');
+const httpStatus = require('http-status');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -40,14 +41,14 @@ app.use((err, req, res, next) => {
     return res.send(err);
   }
 
-  const error = { status: 500, success: false };
+  const error = { status: httpStatus.INTERNAL_SERVER_ERROR, success: false };
   if (process.env.NODE_ENV === 'development') {
     error.message = err.stack || err;
   } else {
     error.message = 'Something wrong!';
   }
 
-  res.status(500);
+  res.status(error.status);
   return res.send(error);
 });
 
