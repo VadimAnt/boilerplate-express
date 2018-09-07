@@ -3,6 +3,7 @@ node_modules
 .idea
 
 env/*
+!env/env.common.js
 !env/env.example.js
 !env/env.development.example.js
 !env/env.test.example.js
