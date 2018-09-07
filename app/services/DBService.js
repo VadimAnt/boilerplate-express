@@ -1,10 +1,10 @@
 const provider = require('mongoose');
 const fs = require('fs');
+
 const { Schema } = provider;
 let connection = null;
 
 module.exports = class DBService {
-
   static initModels() {
     try {
       fs.readdirSync('./app/models/schema').forEach((file) => {
@@ -12,7 +12,6 @@ module.exports = class DBService {
       });
 
       return true;
-
     } catch (error) {
       throw error;
     }
@@ -49,5 +48,4 @@ module.exports = class DBService {
 
     return connection;
   }
-
 };
