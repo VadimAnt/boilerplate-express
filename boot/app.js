@@ -4,7 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { AuthService, DBService } = require('@services');
+const {
+  AuthService,
+  DBService,
+  LoggerService,
+} = require('@services');
 
 const app = express();
 
@@ -18,7 +22,6 @@ DBService.connect({
     database: process.env.DB_DATABASE,
   },
 });
-
 
 const passport = AuthService.init();
 const routes = require('@routes');
@@ -49,6 +52,8 @@ app.use((err, req, res, next) => {
     error.message = 'Something wrong!';
   }
 
+  console.log(LoggerService);
+  LoggerService.log({ message: error.message, level: 'error' });
   res.status(error.status);
   return res.send(error);
 });

@@ -5,3 +5,5 @@ env/env.development.js
 env/env.test.js
 env/env.production.js
 env/env.staging.js
+
+logs/.gitkeep
