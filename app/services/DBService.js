@@ -1,6 +1,8 @@
 const provider = require('mongoose');
 const fs = require('fs');
 
+const SCHEMA_PATH = './app/models/schema';
+
 const { Schema } = provider;
 
 class DBService {
@@ -12,7 +14,7 @@ class DBService {
 
   initModels() {
     try {
-      fs.readdirSync('./app/models/schema').forEach((file) => {
+      fs.readdirSync(SCHEMA_PATH).forEach((file) => {
         require(`@models/schema/${file}`);
       });
 
