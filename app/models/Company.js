@@ -1,3 +1,5 @@
 const BaseModel = require('@models/base');
 
-module.exports = class Company extends BaseModel {};
+class Company extends BaseModel {}
+
+module.exports = new Company();

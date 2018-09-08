@@ -3,16 +3,19 @@ const httpStatus = require('http-status');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const config = require('@config');
+const DBService = require('@services/DBService');
+
+DBService.connect(config.db);
 
 const {
-  AuthService, DBService, LoggerService, MailService,
+  AuthService,
+  LoggerService,
+  MailService,
 } = require('@services');
-
-const config = require('@config');
 
 const app = express();
 MailService.connect(config.smtp.default);
-DBService.connect(config.db);
 
 const passport = AuthService.init();
 const routes = require('@routes');

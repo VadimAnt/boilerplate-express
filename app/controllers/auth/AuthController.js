@@ -2,8 +2,6 @@ const { Response } = require('@utils');
 const { UserModel } = require('@models');
 const { AuthService, CryptoService } = require('@services');
 
-const userModel = new UserModel();
-
 const UserController = {
   async signin(req, res, next) {
     try {
@@ -28,7 +26,7 @@ const UserController = {
 
   async signup(req, res, next) {
     try {
-      await userModel.create({
+      await UserModel.create({
         query: {
           email: req.body.email,
           password: await CryptoService.hash(req.body.password),

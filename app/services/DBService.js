@@ -24,15 +24,22 @@ class DBService {
   }
 
   models(modelName) {
-    if (modelName) {
+    if (modelName && this.loadModels) {
       return this.connection.models[modelName];
     }
 
-    return this.connection.models;
+    if (this.loadModels) {
+      return this.connection.models;
+    }
+
+    return {};
   }
 
   createModel(modelName, schema) {
-    return this.connection.model(modelName, new Schema(schema));
+    if (this.connection) {
+      return this.connection.model(modelName, new Schema(schema));
+    }
+    return false;
   }
 
   connect(config) {

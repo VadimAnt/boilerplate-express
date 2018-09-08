@@ -1,3 +1,5 @@
 const BaseModel = require('@models/base');
 
-module.exports = class User extends BaseModel {};
+class User extends BaseModel {}
+
+module.exports = new User();

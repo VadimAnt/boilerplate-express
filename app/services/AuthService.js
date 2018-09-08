@@ -9,11 +9,10 @@ const LOCAL_AUTHENTICATED = 'local';
 
 module.exports = class AuthService {
   static init() {
-    const userService = new UserModel();
     provider.serializeUser((user, done) => { done(null, user._id); });
     provider.deserializeUser(async (id, done) => {
       try {
-        const user = await userService.findOne({ query: { _id: id } });
+        const user = await UserModel.findOne({ query: { _id: id } });
         if (user) {
           return done(null, user);
         }

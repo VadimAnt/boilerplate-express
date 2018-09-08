@@ -9,8 +9,7 @@ const options = {
 
 module.exports = new JwtStrategy(options, async (payload, done) => {
   try {
-    const userModel = new UserModel();
-    const user = await userModel.findById({ query: payload._id });
+    const user = await UserModel.findById({ query: payload._id });
 
     if (user) {
       return done(null, user);
