@@ -36,7 +36,7 @@ class DBService {
   }
 
   connect(config) {
-    this.connection = this.provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.name}`);
+    this.connection = this.provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.name}`, { useNewUrlParser: true });
     this.initModels();
 
     return this.connection;

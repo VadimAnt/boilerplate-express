@@ -11,7 +11,6 @@ const {
 const config = require('@config');
 
 const app = express();
-console.log(LoggerService);
 MailService.connect(config.smtp.default);
 DBService.connect(config.db);
 MailService.send({ from: 'to' });

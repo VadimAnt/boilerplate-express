@@ -1,9 +1,9 @@
 const DBService = require('@services/DBService');
 
 module.exports = class BaseRepository {
-  constructor({ modelName }) {
-    this.modelName = modelName;
-    this.model = DBService.models(this.modelName);
+  constructor(modelName = null, model = null) {
+    this.modelName = modelName || this.constructor.name;
+    this.model = model || DBService.models(this.modelName);
   }
 
   async findOne({ query = {}, select = {}, lean = false }) {
