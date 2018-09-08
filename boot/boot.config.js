@@ -1,24 +1,25 @@
 module.exports = {
   app: {
     port: process.env.APP_PORT || 80,
+    baseUrl: process.env.BASE_URL || 'http://localhost',
     env: process.env.NODE_ENV || 'development',
     jwtKey: process.env.JWT_SECRET || '',
   },
   db: {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    pass: process.env.DB_PASS,
-    name: process.env.DB_NAME,
-    dialect: process.env.DB_DIALECT,
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 27017,
+    user: process.env.DB_USER || '',
+    pass: process.env.DB_PASS || '',
+    name: process.env.DB_NAME || '',
+    dialect: process.env.DB_DIALECT || 'mongodb',
   },
   smtp: {
     default: {
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-      sequre: process.env.SMTP_SEQURE,
+      host: process.env.SMTP_HOST || 'localhost',
+      port: process.env.SMTP_PORT || 25,
+      user: process.env.SMTP_USER || '',
+      pass: process.env.SMTP_PASS || '',
+      sequre: process.env.SMTP_SEQURE || true,
     },
   },
   security: {
