@@ -51,6 +51,4 @@ app.use((err, req, res, next) => {
   return res.send(error);
 });
 
-app.listen(process.env.APP_PORT, () => {
-  process.stdout.write(`Server start port: ${config.app.port}`);
-});
+module.exports = app;
