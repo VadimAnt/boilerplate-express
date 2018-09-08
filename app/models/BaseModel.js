@@ -1,6 +1,5 @@
 const DBService = require('@services/DBService');
 
-
 module.exports = class BaseRepository {
   constructor({ modelName }) {
     this.modelName = modelName;

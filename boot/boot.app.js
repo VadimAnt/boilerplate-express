@@ -6,18 +6,16 @@ const cors = require('cors');
 
 const { AuthService, DBService, LoggerService } = require('@services');
 
-const app = express();
 const config = require('@config');
 
+const app = express();
 DBService.connect({
-  params: {
-    dialect: config.db.dialect,
-    host: config.db.host,
-    port: config.db.port,
-    user: config.db.user,
-    pass: config.db.pass,
-    name: config.db.name,
-  },
+  dialect: config.db.dialect,
+  host: config.db.host,
+  port: config.db.port,
+  user: config.db.user,
+  pass: config.db.pass,
+  name: config.db.name,
 });
 
 const passport = AuthService.init();
