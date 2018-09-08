@@ -13,7 +13,6 @@ const config = require('@config');
 const app = express();
 MailService.connect(config.smtp.default);
 DBService.connect(config.db);
-MailService.send({ from: 'to' });
 
 const passport = AuthService.init();
 const routes = require('@routes');
