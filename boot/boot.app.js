@@ -4,19 +4,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { AuthService, DBService, LoggerService } = require('@services');
+const {
+  AuthService, DBService, LoggerService, MailService,
+} = require('@services');
 
 const config = require('@config');
 
 const app = express();
-DBService.connect({
-  dialect: config.db.dialect,
-  host: config.db.host,
-  port: config.db.port,
-  user: config.db.user,
-  pass: config.db.pass,
-  name: config.db.name,
-});
+console.log(LoggerService);
+MailService.connect(config.smtp.default);
+DBService.connect(config.db);
+MailService.send({ from: 'to' });
 
 const passport = AuthService.init();
 const routes = require('@routes');

@@ -1,39 +1,46 @@
 const provider = require('nodemailer');
 
-const config = require('@config').smtp;
-
 class MailService {
   constructor() {
-    this.setupMailProvider({
-      host: config.host,
-      port: config.port,
-      secure: config.sequre === true,
-      auth: {
-        user: config.user,
-        pass: config.pass,
-      },
-    });
+    this.connections = [];
+    this.provider = provider;
   }
 
-  setupMailProvider(smtpConfig) {
-    this._serviceProvider = provider;
-    this.smtpConfig = smtpConfig;
-    this.transport = this._serviceProvider.createTransport(this.smtpConfig);
+  connect(config, nameConnection = 'default') {
+    const connection = this.connections.find(conn => conn.name === nameConnection);
 
-    return this.transport;
+    if (connection) {
+      throw new Error('Connection already exists');
+    }
+
+    this.connections.push({
+      name: nameConnection,
+      transport: this.provider.createTransport(config),
+      config,
+    });
   }
 
   async send({
     from, to, subject, html, text, attachments,
-  }) {
-    await this.transport.sendMail({
-      from,
-      to,
-      subject,
-      html,
-      text,
-      attachments,
-    });
+  }, nameConnection = 'default') {
+    try {
+      const connection = this.connections.find(conn => conn.name === nameConnection);
+
+      if (!connection) {
+        throw new Error('Not found mail connection');
+      }
+
+      await connection.transport.sendMail({
+        from,
+        to,
+        subject,
+        html,
+        text,
+        attachments,
+      });
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

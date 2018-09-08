@@ -13,11 +13,13 @@ module.exports = {
     dialect: process.env.DB_DIALECT,
   },
   smtp: {
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-    sequre: process.env.SMTP_SEQURE,
+    default: {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+      sequre: process.env.SMTP_SEQURE,
+    },
   },
   security: {
     saltRounds: process.env.SECURITY_SOLDROUNDS || 10,
