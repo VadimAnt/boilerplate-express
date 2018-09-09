@@ -9,7 +9,8 @@
     "start:staging": "node_modules/.bin/pm2 start ecosystem.config.js --env staging",
     "lint:check": "node_modules/.bin/eslint . *.js",
     "lint:fix": "node_modules/.bin/eslint . *.js --fix",
-    "test": "node node_modules/mocha/bin/mocha ./tests/e2e --exit"
+    "test:e2e": "node node_modules/mocha/bin/mocha ./tests/e2e --exit",
+    "test:unit": "node node_modules/jest/bin/jest ./tests/unit"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +25,6 @@
     "http-status": "^1.2.0",
     "joi": "^13.6.0",
     "jsonwebtoken": "^8.2.1",
-    "module-alias": "^2.1.0",
     "mongoose": "^5.2.9",
     "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
@@ -41,6 +41,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
     "husky": "^1.0.0-rc.13",
+    "jest": "^23.5.0",
     "mocha": "^5.2.0",
     "supertest": "^3.3.0"
   },
@@ -49,18 +50,5 @@
       "pre-commit": "npm run lint:check",
       "pre-push": ""
     }
-  },
-  "_moduleAliases": {
-    "@root": ".",
-    "@app": "app",
-    "@controllers": "app/controllers",
-    "@services": "app/services",
-    "@scripts": "app/scripts",
-    "@errors": "app/errors",
-    "@utils": "app/utils",
-    "@models": "app/models",
-    "@validators": "app/middlewares/validators",
-    "@routes": "app/routes",
-    "@config": "boot/boot.config.js"
   }
 }

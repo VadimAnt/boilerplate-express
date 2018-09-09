@@ -1,7 +1,7 @@
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 const app = require('./boot.app');
-const config = require('@config');
+const config = require('./boot.config');
 
 const COUNT_FORKS = config.app.countForks !== 0 ?
   config.app.countForks : numCPUs;

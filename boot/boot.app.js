@@ -1,12 +1,11 @@
-require('module-alias/register');
 const httpStatus = require('http-status');
 const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const compression = require('compression');
 const cors = require('cors');
-const config = require('@config');
-const DBService = require('@services/DBService');
+const config = require('./boot.config');
+const DBService = require('../app/services/DBService');
 
 DBService.connect(config.db);
 
@@ -14,12 +13,12 @@ const {
   AuthService,
   LoggerService,
   MailService,
-} = require('@services');
+} = require('../app/services');
 
 const app = express();
 MailService.connect(config.smtp.default);
 
-const routes = require('@routes');
+const routes = require('../app/routes');
 
 const passport = AuthService.init();
 

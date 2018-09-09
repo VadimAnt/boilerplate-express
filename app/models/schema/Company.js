@@ -1,4 +1,4 @@
-const DBService = require('@services/DBService');
+const DBService = require('../../services/DBService');
 
 module.exports = DBService.createModel('Company', {
   name: {

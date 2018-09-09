@@ -1,4 +1,4 @@
-const BaseModel = require('@models/base');
+const BaseModel = require('./base');
 
 class Company extends BaseModel {}
 

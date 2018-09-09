@@ -1,7 +1,7 @@
 const provider = require('winston');
 require('winston-daily-rotate-file');
 
-const config = require('@config').logger;
+const config = require('../../boot/boot.config').logger;
 
 class LoggerService {
   constructor() {

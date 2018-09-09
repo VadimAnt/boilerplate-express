@@ -1,8 +1,8 @@
 const provider = require('passport');
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('@models');
+const { UserModel } = require('../models');
 const { LocalStrategy, JwtStrategy } = require('./auth/strategies');
-const config = require('@config').app;
+const config = require('../../boot/boot.config').app;
 
 const JWT_AUTHENTICATED = 'jwt';
 const LOCAL_AUTHENTICATED = 'local';

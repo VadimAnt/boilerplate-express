@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { BadRequest } = require('@errors');
+const { BadRequest } = require('../../errors');
 
 const ARRAY_NAMES = ['body', 'params', 'query'];
 const JOI_OPTIONS = {

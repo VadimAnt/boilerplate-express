@@ -1,5 +1,5 @@
 const provider = require('bcrypt');
-const config = require('@config').security;
+const config = require('../../boot/boot.config').security;
 
 module.exports = {
 

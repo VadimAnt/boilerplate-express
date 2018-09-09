@@ -15,7 +15,7 @@ class DBService {
   initModels() {
     try {
       fs.readdirSync(SCHEMA_PATH).forEach((file) => {
-        require(`@models/schema/${file}`);
+        require(`../models/schema/${file}`);
       });
 
       this.loadModels = true;
