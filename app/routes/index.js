@@ -6,6 +6,6 @@ router.get('/api', (req, res) => {
     data: { message: 'Everything alright I work =)' },
   });
 });
-router.use('/api/v1', require('./api/v1'));
+router.use('/api/v1', require('./v1'));
 
 module.exports = router;
