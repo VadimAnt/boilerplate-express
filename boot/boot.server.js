@@ -4,11 +4,10 @@ const app = require('./boot.app');
 const config = require('@config');
 
 const COUNT_FORKS = config.app.countForks !== 0 ?
-  config.app.countInstance : numCPUs;
+  config.app.countForks : numCPUs;
 
 if (cluster.isMaster) {
   process.stdout.write(`Master ${process.pid} is running\n`);
-
   for (let forks = 0; forks < COUNT_FORKS; forks += 1) {
     cluster.fork();
   }
