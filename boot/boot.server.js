@@ -3,7 +3,8 @@ const numCPUs = require('os').cpus().length;
 const app = require('./boot.app');
 const config = require('@config');
 
-const COUNT_INSTANCE = config.app.countInstance === 0 || numCPUs;
+const COUNT_INSTANCE = config.app.countInstance !== 0 ?
+  config.app.countInstance : numCPUs;
 
 if (cluster.isMaster) {
   process.stdout.write(`Master ${process.pid} is running\n`);
