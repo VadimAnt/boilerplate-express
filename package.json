@@ -8,7 +8,8 @@
     "start:production": "node_modules/.bin/pm2 start ecosystem.config.js --env production",
     "start:staging": "node_modules/.bin/pm2 start ecosystem.config.js --env staging",
     "lint:check": "node_modules/.bin/eslint . *.js",
-    "lint:fix": "node_modules/.bin/eslint . *.js --fix"
+    "lint:fix": "node_modules/.bin/eslint . *.js --fix",
+    "test": "node node_modules/mocha/bin/mocha ./tests/e2e --exit"
   },
   "keywords": [],
   "author": "",
@@ -34,10 +35,14 @@
     "winston-daily-rotate-file": "^3.3.2"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "dotenv-safe": "^6.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
-    "husky": "^1.0.0-rc.13"
+    "husky": "^1.0.0-rc.13",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
   },
   "husky": {
     "hooks": {
