@@ -4,7 +4,7 @@ module.exports = {
     baseUrl: process.env.BASE_URL || 'http://localhost',
     env: process.env.NODE_ENV || 'development',
     jwtKey: process.env.JWT_SECRET || '',
-    countInstance: process.env.APP_COUNT_INSTANCE || 2,
+    countForks: process.env.APP_COUNT_FORKS || 1,
   },
   db: {
     host: process.env.DB_HOST || 'localhost',

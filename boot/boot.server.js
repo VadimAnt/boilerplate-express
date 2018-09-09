@@ -3,13 +3,13 @@ const numCPUs = require('os').cpus().length;
 const app = require('./boot.app');
 const config = require('@config');
 
-const COUNT_INSTANCE = config.app.countInstance !== 0 ?
+const COUNT_FORKS = config.app.countForks !== 0 ?
   config.app.countInstance : numCPUs;
 
 if (cluster.isMaster) {
   process.stdout.write(`Master ${process.pid} is running\n`);
 
-  for (let i = 0; i < COUNT_INSTANCE; i += 1) {
+  for (let forks = 0; forks < COUNT_FORKS; forks += 1) {
     cluster.fork();
   }
 
