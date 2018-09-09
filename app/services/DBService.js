@@ -45,7 +45,13 @@ class DBService {
   }
 
   connect(config) {
-    this.connection = this.provider.createConnection(`${config.dialect}://${config.user}:${config.pass}@${config.host}:${config.port}/${config.name}`, { useNewUrlParser: true });
+    const userCred = `${config.user}:${config.pass}`;
+    const host = `${config.host}:${config.port}/${config.name}`;
+
+    this.connection = this.provider.createConnection(
+      `${config.dialect}://${userCred}@${host}`,
+      { useNewUrlParser: true },
+    );
     this.initModels();
 
     return this.connection;
