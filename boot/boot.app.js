@@ -19,8 +19,10 @@ const {
 const app = express();
 MailService.connect(config.smtp.default);
 
-const passport = AuthService.init();
 const routes = require('@routes');
+
+const passport = AuthService.init();
+
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
