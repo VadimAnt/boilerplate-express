@@ -12,7 +12,6 @@ class MailService {
     if (connection) {
       throw new Error('Connection already exists');
     }
-
     this.connections.push({
       name: nameConnection,
       transport: this.provider.createTransport(config),
@@ -21,7 +20,7 @@ class MailService {
   }
 
   async send({
-    from, to, subject, html, text, attachments,
+    from, to, subject, html, text, attachments = [],
   }, nameConnection = 'default') {
     try {
       const connection = this.connections.find(conn => conn.name === nameConnection);
@@ -30,7 +29,7 @@ class MailService {
         throw new Error('Not found mail connection');
       }
 
-      await connection.transport.sendMail({
+      return connection.transport.sendMail({
         from,
         to,
         subject,

@@ -3,7 +3,8 @@
   "env": {
     "node": true,
     "browser": false,
-    "mocha": true
+    "mocha": true,
+    "jest": true
   },
   "plugins": [
     "mocha"
