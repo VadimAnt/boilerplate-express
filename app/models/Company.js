@@ -1,5 +1,14 @@
-const BaseModel = require('./base');
+const DBService = require('../services/DBService');
 
-class Company extends BaseModel {}
+class Company {}
 
-module.exports = new Company();
+module.exports = DBService.model('Company', Company, {
+  name: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+});

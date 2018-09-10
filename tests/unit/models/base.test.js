@@ -1,5 +1,4 @@
-
-const baseModel = require('../../../app/models/base');
+// const baseModel = require('../../../app/models/base');
 
 module.exports = () => {
   describe('# GET /api', () => {

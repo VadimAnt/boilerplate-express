@@ -11,7 +11,7 @@ const options = {
 
 module.exports = new LocalStrategy(options, async (email, password, done) => {
   try {
-    const user = await UserModel.findOne({ query: { email } });
+    const user = await UserModel.findByEmail(email);
     if (!user) {
       return done(new BadRequest('User not found'), false);
     }

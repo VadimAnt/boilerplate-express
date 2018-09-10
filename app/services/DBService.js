@@ -1,61 +1,31 @@
 const provider = require('mongoose');
-const fs = require('fs');
+const { Schema } = require('mongoose');
 
-const SCHEMA_PATH = './app/models/schema';
+let connection = null;
 
-const { Schema } = provider;
-
-class DBService {
-  constructor() {
-    this.connection = null;
-    this.provider = provider;
-    this.loadModels = false;
-  }
-
-  initModels() {
-    try {
-      fs.readdirSync(SCHEMA_PATH).forEach((file) => {
-        require(`../models/schema/${file}`);
-      });
-
-      this.loadModels = true;
-      return this.loadModels;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  models(modelName) {
-    if (!this.loadModels) {
-      return {};
-    }
-
-    if (modelName) {
-      return this.connection.models[modelName];
-    }
-
-    return this.connection.models;
-  }
-
-  createModel(modelName, schema) {
-    if (this.connection) {
-      return this.connection.model(modelName, new Schema(schema));
-    }
-    return false;
-  }
-
+module.exports = {
   connect(config) {
     const userCred = `${config.user}:${config.pass}`;
     const host = `${config.host}:${config.port}/${config.name}`;
-    console.log(userCred, host);
-    this.connection = this.provider.createConnection(
+
+    connection = provider.createConnection(
       `${config.dialect}://${userCred}@${host}`,
       { useNewUrlParser: true },
     );
-    this.initModels();
 
-    return this.connection;
-  }
-}
+    return connection;
+  },
 
-module.exports = new DBService();
+  getConnection() {
+    if (connection) {
+      return connection;
+    }
+    return false;
+  },
+
+  model(name, cls, schema) {
+    const initSchema = new Schema(schema);
+    initSchema.loadClass(cls);
+    return connection.model(name, initSchema);
+  },
+};
