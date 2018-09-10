@@ -26,12 +26,11 @@ const UserController = {
 
   async signup(req, res, next) {
     try {
-      await UserModel.create({
-        query: {
-          email: req.body.email,
-          password: await CryptoService.hash(req.body.password),
-        },
+      const user = new UserModel({
+        email: req.body.email,
+        password: await CryptoService.hash(req.body.password),
       });
+      await user.save();
 
       return Response.success(res, {});
     } catch (error) {

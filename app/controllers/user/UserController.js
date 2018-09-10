@@ -5,7 +5,7 @@ const { CryptoService } = require('../../services');
 const UserController = {
   async getAll(req, res, next) {
     try {
-      const users = await UserModel.findAll({});
+      const users = await UserModel.find();
       return Response.success(res, users);
     } catch (error) {
       return next(error);
@@ -21,7 +21,8 @@ const UserController = {
         name: req.body.name,
       };
 
-      const user = await UserModel.create({ query: data });
+      const user = new UserModel({ ...data });
+      await user.save();
       return Response.success(res, user);
     } catch (error) {
       return next(error);
@@ -30,7 +31,7 @@ const UserController = {
 
   async getOne(req, res, next) {
     try {
-      const user = await UserModel.findOne({ query: { _id: req.params.id } });
+      const user = await UserModel.findOne({ _id: req.params.id });
       return Response.success(res, user);
     } catch (error) {
       return next(error);
