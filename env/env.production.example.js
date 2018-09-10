@@ -5,8 +5,8 @@ module.exports = {
   DB_HOST: '',
   DB_PORT: '',
   DB_USER: '',
-  DB_PASSWORD: '',
-  DB_DATABASE: '',
+  DB_PASS: '',
+  DB_NAME: '',
   DB_DIALECT: '',
 
   SMTP_HOST: '',

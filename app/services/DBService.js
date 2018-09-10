@@ -47,7 +47,7 @@ class DBService {
   connect(config) {
     const userCred = `${config.user}:${config.pass}`;
     const host = `${config.host}:${config.port}/${config.name}`;
-
+    console.log(userCred, host);
     this.connection = this.provider.createConnection(
       `${config.dialect}://${userCred}@${host}`,
       { useNewUrlParser: true },
