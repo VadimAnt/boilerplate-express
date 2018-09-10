@@ -1,6 +1,6 @@
-const { Response } = require('../../utils');
-const { UserModel } = require('../../models');
-const { CryptoService } = require('../../services');
+const { Response } = require('../utils');
+const { UserModel } = require('../models');
+const { CryptoService } = require('../services');
 
 const UserController = {
   async getAll(req, res, next) {
