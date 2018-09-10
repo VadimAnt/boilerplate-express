@@ -7,8 +7,8 @@ const config = require('../../boot/boot.config').app;
 const JWT_AUTHENTICATED = 'jwt';
 const LOCAL_AUTHENTICATED = 'local';
 
-module.exports = class AuthService {
-  static init() {
+module.exports = {
+  init() {
     provider.serializeUser((user, done) => { done(null, user._id); });
     provider.deserializeUser(async (id, done) => {
       try {
@@ -26,17 +26,17 @@ module.exports = class AuthService {
     provider.use(JwtStrategy);
 
     return provider;
-  }
+  },
 
-  static verifyUserCred() { // LOCAL STRATEGY
+  verifyUserCred() { // LOCAL STRATEGY
     return provider.authenticate(LOCAL_AUTHENTICATED);
-  }
+  },
 
-  static isAuthenticated() { // JWT STRATEGY
+  isAuthenticated() { // JWT STRATEGY
     return provider.authenticate(JWT_AUTHENTICATED);
-  }
+  },
 
-  static async sign(payload) {
+  async sign(payload) {
     return jwt.sign(payload, config.jwtKey);
-  }
+  },
 };
