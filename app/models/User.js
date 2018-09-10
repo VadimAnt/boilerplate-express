@@ -1,6 +1,5 @@
 const DBService = require('../services/DBService');
 
-
 class User {
   static findByEmail(email) {
     return this.findOne({ email });

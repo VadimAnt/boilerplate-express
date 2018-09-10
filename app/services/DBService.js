@@ -24,8 +24,12 @@ module.exports = {
   },
 
   model(name, cls, schema) {
-    const initSchema = new Schema(schema);
-    initSchema.loadClass(cls);
-    return connection.model(name, initSchema);
+    try {
+      const initSchema = new Schema(schema);
+      initSchema.loadClass(cls);
+      return connection.model(name, initSchema);
+    } catch (error) {
+      throw error;
+    }
   },
 };
